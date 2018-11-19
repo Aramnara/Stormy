@@ -21,7 +21,7 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final  String TAG = MainActivity.class.getSimpleName();
+    public static final String TAG = MainActivity.class.getSimpleName();
 
     private CurrentWeather currentWeather;
 
@@ -92,6 +92,9 @@ public class MainActivity extends AppCompatActivity {
         currentWeather.setPrecipChance(currently.getDouble("precipProbability"));
         currentWeather.setSummary(currently.getString("summary"));
         currentWeather.setTemperature(currently.getDouble("temperature"));
+        currentWeather.setTimeZone(timezone);
+
+        Log.d(TAG, currentWeather.getFormattedTime());
 
         return currentWeather;
     }
@@ -103,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         boolean isAvailable = false;
         if (networkInfo != null && networkInfo.isConnected()) {
             isAvailable = true;
-        }else{
+        } else {
             Toast.makeText(this, getString(R.string.network_unavailable_message),
                     Toast.LENGTH_SHORT).show();
         }
